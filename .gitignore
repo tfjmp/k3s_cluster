@@ -1,0 +1,12 @@
+*~
+*.log
+*.pyc
+*.sqlite3
+*.swp
+__pycache__
+.DS_Store
+.idea
+.python-version
+logs
+pid
+.vagrant/
