@@ -15,11 +15,11 @@ if [ "$NODE_TYPE" == "master" ]; then
   etcd_file=/etc/default/etcd
   [ -f $etcd_file ] && mv $etcd_file "${etcd_file}.`date +'%Y%m%d'`"
   (
-  echo ETCD_LISTEN_CLIENT_URLS=http://0.0.0.0:2379
-  echo ETCD_ADVERTISE_CLIENT_URLS=http://0.0.0.0:2379
+  echo ETCD_LISTEN_CLIENT_URLS=\"http://0.0.0.0:2379\"
+  echo ETCD_ADVERTISE_CLIENT_URLS=\"http://0.0.0.0:2379\"
   ) > $etcd_file
   systemctl enable etcd
-  systemctl start etcd
+  systemctl restart etcd
 fi
 
 # Adding entries in hosts file into /etc/hosts
@@ -55,5 +55,10 @@ fi
 echo $start_command
 sed "s/ExecStart.*/ExecStart=$start_command/g" `pwd`/k3s.service > /lib/systemd/system/k3s.service
 systemctl enable k3s
-systemctl start k3s
+systemctl restart k3s
+
+# Copy k3s.yaml to host
+if [ "$NODE_TYPE" == "master" ]; then
+  sed "s/127.0.0.1/$K3S_CLUSTER_NAME/g" /etc/rancher/k3s/k3s.yaml > /vagrant/k3s.yaml
+fi
 
