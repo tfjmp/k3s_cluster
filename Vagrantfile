@@ -75,7 +75,6 @@ def create_node(vagrant, config, count, type='master')
     node.vm.hostname = name
     node.vm.network :private_network, ip: ip
     node.vm.boot_timeout = 600
-    node.vbguest.auto_update = false
 
     node.vm.provider "virtualbox" do |v|
       v.customize ["modifyvm", :id, "--memory", obj['specs']['mem']]
