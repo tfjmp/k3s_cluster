@@ -9,7 +9,7 @@ Starting point is one master one worker, however, any number of masters/workers 
 
 ## Quickstart
 ```
-$ git clone https://github.com/trankchung/k3s_cluster.git
+$ git clone https://github.com/tfjmp/k3s_cluster.git
 $ cd k3s_cluster
 $ vagrant up
 $ ssh vagrant@172.20.22.10 -i .vagrant/machines/master01/virtualbox/private_key sudo cat /etc/rancher/k3s/k3s.yaml > k3s.yaml
@@ -33,4 +33,3 @@ Make sure `k3s.datastoreEndpoint` in `config.yaml` is reachable for all master n
 __Problem__: kubectl won't connect.
 
 Make sure `k3s.clusterName` is reachable on port `6443` from where `kubectl` is executed.
-
