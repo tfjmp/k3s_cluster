@@ -1,6 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+require 'date'
 require 'yaml'
 require 'ostruct'
 
